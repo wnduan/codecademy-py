@@ -1,4 +1,6 @@
 codecademy-py
-=============
+===
 
-Python introduction course
+### What / 项目介绍
+
+利用 *Code Cademy* 的在线教程学习 *Pyton* 语言；该项目是本人学习过程中对于原教程的翻译和整理。将根据本人的需求添加一些笔记或是删减一些内容
