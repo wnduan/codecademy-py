@@ -9,8 +9,8 @@ Advanced Topics in Python
 ### 1.1 Iterators for Dictionarys / 遍历 Dictionary 中元素
 先从*遍历 dictionary* 中的元素讲起，回想一下 dictionary 其实就是 *key（键）* 和 *value（值）* 的集合。Python的 `items()` 函数可以遍历 dictionary 中的各个元素，并且返回其 key/value 对。用法就是 `dictionary.tiems()` 。注意：*这个函数遍历dictionary时并不按照特定的顺序。*
 
-**练习**
 
+**练习**
 可以尝试运行下面的例子：
 
 ```python
@@ -36,7 +36,6 @@ print my_dict.items()
 - 可以暂且将 **tuple** 理解为一个 *不可改变的表* *immutable list* 。（当然这只是过于简化的比较）tuple 由一对圆括号 `()` 包围，可以包含任意数据类型。
  
 **练习** 
-
 可以将前面例子中的 `print` 语句改为 `print my_dict.keys()` 和 `print my_dict.values()` 从而分别输出 dictionary 中的 键(keys) 和 值(values)。
 
 
@@ -59,7 +58,6 @@ for letter in "Eric":
 ```
 
 **练习** 
-
 接前面的练习，使用 `in` 操作符，遍历 `my_dict` 中的各个元素并用 `print` 将其输出到屏幕。将 key 和 value 用一个空格分开（使用 `print key, value` 来进行输出，避免使用 `print key + " " + value` 这样的语句）。
 注意，`print key, value` 语句中，逗号的使用，使得输出时在两个变量间插入了一个空格，并且使两个变量输出在同一行。
 ```python
@@ -78,7 +76,6 @@ my_list = range(51)
 当然可以通过 `for` 语句和 `if` 语句的联合使用来实现上述目的。但是，Python提供了更为便捷的方式，那就是 **List Comprehension** 。 List comprehensions 是一个非常强大的定义列表的方式，通过我们已经学过的 `for`/`in` 以及 `if` 关键字来定义列表(list)。
 
 **例子**
-
 可以运行下面的语句看看是什么效果：
 ```python
 evens_to_50 = [i for i in range(51) if i % 2 == 0]
@@ -106,7 +103,6 @@ doubles_by_3 = [x*2 for x in range(1,6) if (x*2)%3 == 0]
 ```
 
 **练习**
-
 用 list comprehension 建立一个名为 `even_squares` 的列表变量。这个列表应该包括1~10的数中能被2整除的数的平方。（包括10）
 ```python
 even_squares = [i**2 for i in range(1,11) if i%2 == 0]
@@ -117,7 +113,6 @@ print even_squares
 现在，尝试自己来使用list comprehension。
 
 **练习**
-
 创建一个名为 `cubes_by_four` 的列表。由1~10的数的立方中能被4整除的数组成。然后将他们显示出来。
 ```python
 cubes_by_four = [x**3 for x in range(1,11) if (x**3)%4 == 0]
@@ -125,8 +120,89 @@ print cubes_by_four
 ```
 
 ## 3. List Slicing / 列表片段（划分）
-### 3.1 List Slicing Syntax
-### 3.2
-### 3.3
-### 3.4
-### 3.5
+
+### 3.1 List Slicing Syntax / 列表片段的基本语法
+有时候，我们只需要列表(list)中的一部分元素。可能仅需要前一部分或后一部分或者需要间隔分布的元素，
+
+这时候就需要列表片段的帮助，他可以使我们以一种更准确的方式获取列表中的元素。其语法形式如下：
+```python
+[start:end:stride]
+```
+
+其中 `start` 是片段开始的指数(index)（包括 start 本身，即片段中的元素大于等于 start，注意第一项的index是0），`end` 是片段结束的指数(index)（和 `range()` 一样，end 本身是不包括的，即片段中的元素小于 end）`stride` 定义了列表片段中项目间的间距（步长）。例如，stride 步长为 `2` 时，将在原列表中每隔一个选取一个元素形成列表片段。
+
+**例子**
+可以运行如下代码，看看代码片段的机制是如何工作的：
+```python
+l = [i ** 2 for i in range(1, 11)]
+# Should be [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+print l[2:9:2]
+```
+
+### 3.2 Omitting Indices / 省略指数
+如果用户没有指定列表片段中的三个指数(index)，Python会为其选择默认值。默认的起始 index 是列表中的第一个元素，即 `0` ；默认的结束 index 是列表中的最后一个元素， 即 `len(list) + 1` ；而默认的步长(stride)为 `1` 。例如：
+```python
+to_five = [1, 2, 3, 4, 5]
+print to_five[3::]
+# prints [4, 5] 
+```
+
+上面例子中，列表 `to_five` 在指数 `3` 处的元素是 `4`，由于后面两个指数都省略了，Python 认为你需要取到列表的最后一项，且计数每次增加1。
+
+**练习**
+学习了以上内容，现在练习使用代码片段输出 `my_list` 中从开始到结束间隔的元素，即输奇数（实际上是偶数index）。
+```python
+my_list = range(1, 11) # List of numbers 1 - 10
+
+# Add your code below!
+print my_list[::2]
+```
+
+### 3.3 Reversing a List / 倒序输出列表
+步长 (stride) 为正值时，将按从左到右的顺序遍历列表；相反，一个负数的步长，将从右至左遍历列表。
+
+**练习**
+定义一个列表变量 `backwards` 并使其等于 `my_list` 的倒序。使用列表片段中负的步长来实现list元素的反向。在这个练习中不必指定第一个和第二个指数。
+```
+my_list = range(1, 11)
+
+# Add your code below!
+backwards = my_list[::-1]
+```
+
+### 3.4 Stride Length / 步长
+前面已经了解了，正的步长将从左至右遍历列表，负的步长从右至左遍历列表。更进一步，步长为1时，将以1为间隔遍历列表；步长为2时将以2为间隔遍历列表。这很简单了。
+
+**练习**
+
+一个简单的练习：定义一个列表变量 `backwards_by_tens` ，以 `10` 为步长遍历 `to_one_hundred` 并且将结果赋给 `backwards_by_tens`。用 `print` 将新的变量输出到屏幕。
+```python
+to_one_hundred = range(101)
+# Add your code below!
+backwards_by_tens = to_one_hundred[::10]
+print backwards_by_tens
+```
+
+### 3.5 Practice Makes Perfect / 练习
+以上就学习了列表片段的相关内容。下面来做一个练习：
+
+**练习**
+1. 定义一个列表 `to_21` ，包括1~21的数字（包括21）
+2. 定义第二个列表 `odds` ，由 `to_21` 中的奇数组成。用 list slicing 而非 list comprehension 语句实现
+3. 最后，定义第三个列表 `middle_third` ，由 `to_21` 的中间三分之一元素构成
+```python
+to_21 = range(1,22)
+odds = to_21[::2]
+middle_third = to_21[(len(to_21)/3):(len(to_21)*2/3)]
+print to_21
+print odds
+print middle_third
+```
+
+## 4. Lambdas
+### 4.1 Anonymous Functions
+### 4.2 Lambdas Syntax
+### 4.3 Try it
+## 5. Review
+>>>>>>> Update Advanced-Topics-in-Python.md
