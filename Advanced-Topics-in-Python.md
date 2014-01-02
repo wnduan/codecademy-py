@@ -9,7 +9,8 @@ Advanced Topics in Python
 ### 1.1 Iterators for Dictionarys / 遍历 Dictionary 中元素
 先从*遍历 dictionary* 中的元素讲起，回想一下 dictionary 其实就是 *key（键）* 和 *value（值）* 的集合。Python的 `items()` 函数可以遍历 dictionary 中的各个元素，并且返回其 key/value 对。用法就是 `dictionary.tiems()` 。注意：*这个函数遍历dictionary时并不按照特定的顺序。*
 
-**练习** 
+**练习**
+
 可以尝试运行下面的例子：
 
 ```python
@@ -35,6 +36,7 @@ print my_dict.items()
 - 可以暂且将 **tuple** 理解为一个 *不可改变的表* *immutable list* 。（当然这只是过于简化的比较）tuple 由一对圆括号 `()` 包围，可以包含任意数据类型。
  
 **练习** 
+
 可以将前面例子中的 `print` 语句改为 `print my_dict.keys()` 和 `print my_dict.values()` 从而分别输出 dictionary 中的 键(keys) 和 值(values)。
 
 
@@ -57,11 +59,11 @@ for letter in "Eric":
 ```
 
 **练习** 
+
 接前面的练习，使用 `in` 操作符，遍历 `my_dict` 中的各个元素并用 `print` 将其输出到屏幕。将 key 和 value 用一个空格分开（使用 `print key, value` 来进行输出，避免使用 `print key + " " + value` 这样的语句）。
 注意，`print key, value` 语句中，逗号的使用，使得输出时在两个变量间插入了一个空格，并且使两个变量输出在同一行。
 ```python
-# my_dict was defined previously
-for key in my_dict:
+for key in my_dict:  # my_dict was defined previously
     print key, value
 ```
 
@@ -76,6 +78,7 @@ my_list = range(51)
 当然可以通过 `for` 语句和 `if` 语句的联合使用来实现上述目的。但是，Python提供了更为便捷的方式，那就是 **List Comprehension** 。 List comprehensions 是一个非常强大的定义列表的方式，通过我们已经学过的 `for`/`in` 以及 `if` 关键字来定义列表(list)。
 
 **例子**
+
 可以运行下面的语句看看是什么效果：
 ```python
 evens_to_50 = [i for i in range(51) if i % 2 == 0]
@@ -103,6 +106,7 @@ doubles_by_3 = [x*2 for x in range(1,6) if (x*2)%3 == 0]
 ```
 
 **练习**
+
 用 list comprehension 建立一个名为 `even_squares` 的列表变量。这个列表应该包括1~10的数中能被2整除的数的平方。（包括10）
 ```python
 even_squares = [i**2 for i in range(1,11) if i%2 == 0]
@@ -113,6 +117,7 @@ print even_squares
 现在，尝试自己来使用list comprehension。
 
 **练习**
+
 创建一个名为 `cubes_by_four` 的列表。由1~10的数的立方中能被4整除的数组成。然后将他们显示出来。
 ```python
 cubes_by_four = [x**3 for x in range(1,11) if (x**3)%4 == 0]
