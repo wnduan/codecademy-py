@@ -289,7 +289,38 @@ print movies.items()
 
 **练习**
 
+用 list comprehension 建立一个列表(list)，`threes_and_fives`，由1~15的数中能被3或5整除的数。
+```python
+threes_and_fives = [n for n in range(1,16) if (n%3 == 0 or n%5 ==0)]
+```
 
-### 5.3 
-### 5.4
+### 5.3 List Slicing
+接下来练习 list slicing
+
+在 Python 中可以将字符串(string)看作一个字母(character)的列表(list)。（这样理解有点过于简化了，很明显一点不同字符串是不可变的immutable而列表是可变的mutable，更详细的参考注释）。这意味着，之前学习的 list slicing 操作可同样用于字符串！
+
+> 注：要始终记住在Python中列表(list)是可变的(mutable/changeable)，但字符串(string)则不是。当你切分(slice)一个字符串时，将会获得一个新的字符串。原有的字符串并不发生改变。
+
+**练习**
+
+现在给出的 string 是混乱的。使用 list slicing 提取出信息并将其保存在 名为 `message` 的变量
+```python
+garbled = "!XeXgXaXsXsXeXmX XtXeXrXcXeXsX XeXhXtX XmXaX XI"
+message = garbled[::-2]
+```
+
+### 5.4 Lambda Expressions
+最后再来复习一下 `lambda` 表达式，直接进入一个练习
+
+**练习**
+
+现在给定了另一个（和之前有些不同）的混乱的字符串 `garbled`。定义一个 `message` 变量，用 `filter()` 和适合的 `lambda` 表达式过滤掉"X"，赋值给 `message`。最后将结果输出到屏幕。
+```python
+garbled = "IXXX aXXmX aXXXnXoXXXXXtXhXeXXXXrX sXXXXeXcXXXrXeXt mXXeXsXXXsXaXXXXXXgXeX!XX"
+message = filter(lambda c: c!="X" , garbled)
+```
+
+
+
+
 
