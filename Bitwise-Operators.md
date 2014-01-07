@@ -239,3 +239,91 @@ print ~123
 ```
 
 ## 3. A Bit More Complicated
+
+### 3.1 The Man Behind the Bit Mask 
+
+**bit mask** 是一個可以帮助你进行位操作的变量。可以用来指定打开某一位而关掉其他所有数位，或者返回一个整数对应的二进制数的为1和0的数位的信息。
+
+例如，我们现在希望看看数 `a` 的二进制数位，右边数起第三位是否是 *开* 的状态，即该位是否为1。使用 `&` 运算符和 `mask` 变量配合，将是完成上述判断的最佳办法，具体代码如下：
+```python
+mask = 0b100
+desired = a & mask
+```
+
+使用 `&` 和 `0b100` 将会使 `a` 的除右数第三位之外的所有数位为 *关*。这时，如果右数第三位为0则返回0，否则返回1，反过来讲，若结果大于0则指定的数位为 *开* ，否则为 *关*。
+
+**练习**
+
+写一个函数，`check_bit4`，该函数以一个整数作为输入，检查该数的右起第四位是否为 *开* 。如果判断为 *开* 则返回字符串 `"on"` 否则返回 `"off"` 。
+```python
+def check_bit4(a):
+    mask = 0b1000
+    result = a & mask
+    if result > 0:
+        return "on"
+    else:
+        return "off"
+```
+
+### 3.2 Turn It On
+
+也可以用mask变量和 `|` 将一个数对应二进制数位的某一位打 *开*。例如，我希望最右边的一位为 *开*，那么可以做如下操作：
+```python
+a = 0b110 # 6
+mask = 0b1 # 1
+desired =  a | mask # 0b111, or 7
+```
+
+使用二进制的与操作 `|` 对于指定的数位，可以打开原来为 *关* 的状态，或保持原来为 *开* 的状态仍然为开。
+
+**练习**
+
+已经给出了一个变量，`a`。使用一个 bitmask 和 一个值，确保 `a` 右起第三位为开。记住用 `print` 和 `bin()` 函数将结果输出到屏幕。
+```python
+a = 0b10111011
+mask = 0b100
+desired =  a | mask
+print bin(desired)
+```
+
+### 3.3 Just Flip Out
+
+用异或 (XOR/^) 符号可以有效进行的反转所有的数位的操作，比如希望反转 `a` 中所有的数位，那么只需要下面的操作：
+```python
+a = 0b110 # 6
+mask = 0b111 # 7
+desired =  a ^ mask # 0b1
+```
+
+**练习**
+
+给定了一个8位的变量 `a`。用一个bitmask和值，反转a的所有数位。用 `print` 和 `bin()` 函数将结果输出到屏幕。
+```python
+a = 0b11101110
+mask = 0b11111111
+desired =  a ^ mask
+print bin(desired)
+```
+
+### 3.4 Slip and Slide
+
+最后，你还可以配合左移(`<<`)和右移(`>>`)操作，将mask移动到指定的位置。
+
+例如，我希望将整数 `a` 从右数起第10位打开，我们可以将1从第1位移动到第10位，而不必直接输入整个（10位长的）数字，如下：
+```python
+a = 0b101 
+mask = (0b1 << 9)  # One less than ten 
+desired = a ^ mask
+```
+
+注意：*要从第1位移动到第10位只需移动9次！*
+
+**练习**
+
+首先，我们定义一个函数 `flip_bit` ，接受输入 `(number, n)` 两个参数，将 `number` 的第 `n` 位反转，返回反转后的结果。返回的结果为二进制字符串`bin()`
+```python
+def flip_bit(number, n):
+    mask = (0b1 << (n-1))  # One less than n
+    desired = number ^ mask
+    return bin(desired)
+```
