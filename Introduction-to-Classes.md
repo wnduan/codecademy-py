@@ -136,3 +136,40 @@ print zebra.name
 
 ## 2. Member Variables and Functions / 成员变量和函数
 ### 2.1 More on __init__() and self / 关于 __init__() 和 self 的更多内容
+
+现在我们已经初步了解了类和对象是如何工作的，现在我们来进一步的钻研一下 `__init__()` 和 `self` 。 很容易让人糊涂的两个概念。
+
+之前提过，可以将 `__init__()` 看成一个用来启动由类实例化成的对象的方法：init 本来就是 初始化("initialize") 的缩写。
+
+传统上，`__init__()` 方法获得的第一个声明(argument) 【这个声明其实也就是传递进来的参数】用于指向实例对象，这个声明就是 `self`。如果需要增加其他的声明，例如你的animal的 `name` 和 `age` ，则在 `__init__()` 函数内另他们等于`self.name` 和 `self.age` ，这样当你创建一个 `Animal` 类的实例对象时，你需要给每个实例指定一个名字和年龄，这些变量将与特定的实例相关联。
+
+**练习**
+
+根据上面的内容，和已经给出的代码，看看 `__init__()` 如何启动每一个对象接收一个名字和年龄的输入，然后用 `self.name` 和 `self.age` 把这些名字赋给每一个对象。
+
+之后，增加第三个属性，`is_hungry` ，之后查看代码运行的结果
+
+```python
+# Class definition
+class Animal(object):
+    """Makes cute animals."""
+    # For initializing our instance objects
+    def __init__(self, name, age, is_hungry):
+        self.name = name
+        self.age = age
+        self.is_hungry = is_hungry
+
+# Note that self is only used in the __init__()
+# function definition; we don't need to pass it
+# to our instance objects.
+
+zebra = Animal("Jeffrey", 2, True)
+giraffe = Animal("Bruce", 1, False)
+panda = Animal("Chad", 7, True)
+
+print zebra.name, zebra.age, zebra.is_hungry
+print giraffe.name, giraffe.age, giraffe.is_hungry
+print panda.name, panda.age, panda.is_hungry
+```
+
+### 2.2 Class Scope / 类的作用域
