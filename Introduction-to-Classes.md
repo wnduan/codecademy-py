@@ -173,3 +173,31 @@ print panda.name, panda.age, panda.is_hungry
 ```
 
 ### 2.2 Class Scope / 类的作用域
+
+关于Python类的另一个重要方面是范围(scope)。一个变量的范围(scope)是一个对程序可见的环境？？。(The scope of a variable is the context in which it's visible to the program.)
+
+可能你会觉得惊讶，并不是所有的变量都能在任意时刻被Python程序访问。当处理类时，你可以定义在哪都可以被访问的变量 **（全局变量(global variables)）**，只能被某些类的成员访问的变量 **（成员变量(member variables)）**，以及只能被类的某些特殊实例访问的变量 **（实例变量(instance variables)）**。
+
+对函数(function)也是一样：有些在哪都可以访问，有些只能被某个类的成员访问，其他的一些只能被特殊的实例对象访问。
+
+**例子**
+
+阅读并学习下面的代码。注意每个单独的animal都有他自己的 `name` 和 `age` （因为他们都是各自独立初始化的）。但是每个单独的对象都可以访问成员变量(member variable) `is_alive` ， 因为他们都是 `Animal` 类的成员。执行代码看看结果。
+
+```python
+class Animal(object):
+    """Makes cute animals."""
+    is_alive = True
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+zebra = Animal("Jeffrey", 2)
+giraffe = Animal("Bruce", 1)
+panda = Animal("Chad", 7)
+
+print zebra.name, zebra.age, zebra.is_alive
+print giraffe.name, giraffe.age, giraffe.is_alive
+print panda.name, panda.age, panda.is_alive
+```
+
